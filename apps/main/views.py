@@ -5,6 +5,8 @@ from .services import create_short_url, get_list_url
 from .models import ShortUrl
 from django.shortcuts import redirect
 from .models import ShortUrl
+from django.shortcuts import render
+from django.contrib import messages
 
 
 class HomeView(generic.TemplateView):
@@ -14,7 +16,9 @@ class HomeView(generic.TemplateView):
 class ShortUrlList(generic.ListView):
 	context_object_name = 'links'
 	template_name = "main/short_url_list.html"
-	queryset = ShortUrl.objects.all()
+
+	def get_queryset(self):
+		return get_list_url(self.request)
 
 
 class ShortUrlCreate(generic.FormView):
@@ -22,5 +26,15 @@ class ShortUrlCreate(generic.FormView):
 	template_name = "main/short_url_create.html"
 
 	def post(self, request, *args, **kwargs):
-		short_url, created = create_short_url(request)
-		return redirect('/')
+		"""если в переменную success приходит False, то в переменной msg будет описание ошибки
+		example: msg = "some error"
+		если success=True, то в msg строка об успешной операции
+		example: msg = "ok"
+		"""
+		success, msg = create_short_url(request)
+		if not success:
+			messages.error(request, msg)
+			return redirect("shorturl_create_view")
+
+		messages.info(request, msg)
+		return redirect("shorturl_list_view")

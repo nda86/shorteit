@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block content %}
+
 <form action="{% url "shorturl_create_view" %}" method="post">
     {% csrf_token %}
   <div class="form-group">
@@ -7,6 +9,18 @@
     <label for="id_original_url">Введите URL адрес, который хотите сократить...</label>
     {{ form.original_url }}
   </div>
+   <div class="form-group">
+    {{ form.subpart.errors }}
+    <label for="id_subpart">Введите текст сокращенного URL(необязательно)...</label>
+    {{ form.subpart }}
+  </div>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning" role="alert">
+                <strong>{{ message }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
   <button type="submit" class="btn btn-primary">ShortIt!</button>
 </form>
 {% endblock %}
