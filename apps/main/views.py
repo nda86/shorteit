@@ -1,12 +1,11 @@
 from django.views import generic
-from django.views import View
-from .forms import ShortUrlCreateForm
-from .services import create_short_url, get_list_url
-from .models import ShortUrl
 from django.shortcuts import redirect
-from .models import ShortUrl
-from django.shortcuts import render
 from django.contrib import messages
+
+from .forms import ShortUrlCreateForm
+from .services import (
+	create_short_url, get_list_url, get_original_url, increment_count_links
+)
 
 
 class HomeView(generic.TemplateView):
@@ -38,3 +37,14 @@ class ShortUrlCreate(generic.FormView):
 
 		messages.info(request, msg)
 		return redirect("shorturl_list_view")
+
+
+def redirect_to_original_url(request, short):
+	url = get_original_url(short)
+	if url:
+		increment_count_links(url)
+		print(url.original_url)
+		return redirect(url.original_url)
+	else:
+		messages.warning(request, "Запрошенный URL не найден. Возможно он уже удален из базы")
+		return redirect('shorturl_list_view')

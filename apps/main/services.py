@@ -1,5 +1,6 @@
 import hashlib
 from .models import ShortUrl
+from shorteit.settings import BASE_URL
 
 
 def get_user_id(request):
@@ -13,8 +14,8 @@ def gen_short_url(original_url):
 def create_short_url(request):
 	user_id = get_user_id(request)
 	original_url = request.POST.get("original_url")
-	subpart = request.POST.get("subpart").strip()
-	short_url = subpart if subpart else gen_short_url(original_url)
+	subpart = request.POST.get('subpart').strip()
+	short_url = BASE_URL + "/" + (subpart if subpart else gen_short_url(original_url))
 
 	# обработка случая когда введенное пользователем subpart часть url уже использована
 	if ShortUrl.objects.filter(short_url=short_url).first():
@@ -37,3 +38,15 @@ def create_short_url(request):
 
 def get_list_url(request):
 	return ShortUrl.objects.filter(user_id=get_user_id(request)).all()
+
+
+def get_original_url(short):
+	return ShortUrl.objects.filter(short_url=BASE_URL + "/" + short).first()
+
+
+def increment_count_links(url):
+	try:
+		url.count_click += 1
+		url.save()
+	except Exception as e:
+		pass
