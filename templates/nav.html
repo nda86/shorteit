@@ -1,8 +1,11 @@
 <ul class="nav justify-content-center">
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'home_view' %}">home</a>
+        <a class="nav-link" href="{% url 'home_view' %}">Главная</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'short_url_view' %}">enter</a>
+        <a class="nav-link" href="{% url 'shorturl_list_view' %}">Список URL</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'shorturl_create_view' %}">Добавить URL</a>
     </li>
 </ul>

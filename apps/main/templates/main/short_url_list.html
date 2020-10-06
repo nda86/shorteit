@@ -1,4 +1,23 @@
 {%  extends "base.html" %}
 {% block content %}
-
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Оригинальный URL</th>
+              <th scope="col">Короткий URL</th>
+              <th scope="col">Количество переходов</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for link in links %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ link.original_url }}</td>
+                <td>{{ link.short_url }}</td>
+                <td>{{ link.count_click }}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

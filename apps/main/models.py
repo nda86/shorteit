@@ -7,7 +7,7 @@ class ShortUrl(models.Model):
 	по короткому урлу и собственно сам сокращенный урл.
 	"""
 	user_id = models.UUIDField(verbose_name="Идентификатор пользователя")
-	original_url = models.URLField(verbose_name="Оригинальный URL")
+	original_url = models.URLField(verbose_name="Оригинальный URL", unique=True)
 	short_url = models.URLField(verbose_name="Сокращенный URL")
 	created_at = models.DateTimeField(verbose_name="Дата создания короткого URL", auto_now_add=True)
 	count_click = models.IntegerField(verbose_name="Количество переходов по короткому URL", default=0)

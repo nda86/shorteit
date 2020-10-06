@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url "shorturl_create_view" %}" method="post">
+    {% csrf_token %}
+  <div class="form-group">
+    {{ form.original_url.errors }}
+    <label for="id_original_url">Введите URL адрес, который хотите сократить...</label>
+    {{ form.original_url }}
+  </div>
+  <button type="submit" class="btn btn-primary">ShortIt!</button>
+</form>
+{% endblock %}
