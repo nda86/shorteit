@@ -18,3 +18,4 @@ class ShortUrl(models.Model):
 	class Meta:
 		db_table = "main_short_url"
 		unique_together = ("user_id", "original_url")
+		ordering = ('-created_at',)

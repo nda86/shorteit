@@ -1,21 +1,46 @@
 {%  extends "base.html" %}
+{% load tz %}
 {% block content %}
+
+    {% if page_obj.has_previous %}
+        <a href="{{ page_obj.previous_page_number }}"><<<</a>
+        {% else %}
+            <<<
+    {% endif %}
+
+    {% for num_page in page_obj.paginator.page_range %}
+        {% if num_page != page_obj.number %}
+            <a href="?page={{ num_page }}">{{ num_page }}</a>
+        {% else %}
+            {{ num_page }}
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">>>></a>
+    {% else %}
+            >>>
+    {% endif %}
+
+
     <table class="table table-striped">
         <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Оригинальный URL</th>
               <th scope="col">Короткий URL</th>
-              <th scope="col">Количество переходов</th>
+              <th scope="col">Кол. кликов</th>
+                <th scope="col">Дата создания</th>
             </tr>
         </thead>
         <tbody>
             {% for link in links %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td>{{ link.original_url }}</td>
-                <td>{{ link.short_url }}</td>
+                <td><a href="{{ link.original_url }}">{{ link.original_url | truncatechars:55 }}</a></td>
+                <td><a href="{{ link.short_url }}">{{ link.short_url }}</a></td>
                 <td>{{ link.count_click }}</td>
+              <td>{{ link.created_at  }}</td>
               </tr>
             {% endfor %}
         </tbody>

@@ -1,6 +1,7 @@
 from django.views import generic
 from django.shortcuts import redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 from .forms import ShortUrlCreateForm
 from .services import (
@@ -15,6 +16,7 @@ class HomeView(generic.TemplateView):
 class ShortUrlList(generic.ListView):
 	context_object_name = 'links'
 	template_name = "main/short_url_list.html"
+	paginate_by = 3
 
 	def get_queryset(self):
 		return get_list_url(self.request)
