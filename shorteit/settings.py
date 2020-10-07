@@ -77,6 +77,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ.get("CACHE_REDIS_URI"),
+        'KEY_PREFIX': 'shortit_cache'
+    }
+}
+
 # Internationalization
 LANGUAGE_CODE = 'ru-RU'
 

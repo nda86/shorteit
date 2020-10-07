@@ -1,7 +1,8 @@
 from django.views import generic
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib import messages
-from django.core.paginator import Paginator
+from django.views.decorators.cache import cache_page
+
 
 from .forms import ShortUrlCreateForm
 from .services import (
@@ -45,7 +46,6 @@ def redirect_to_original_url(request, short):
 	url = get_original_url(short)
 	if url:
 		increment_count_links(url)
-		print(url.original_url)
 		return redirect(url.original_url)
 	else:
 		messages.warning(request, "Запрошенный URL не найден. Возможно он уже удален из базы")
