@@ -2,10 +2,14 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+import yaml
+import logging
+import logging.config
 
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent
 
 
 SECRET_KEY = os.environ["SECRET_KEY"]
@@ -100,3 +104,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+with open(os.path.join(ROOT_DIR, "log_config.yml")) as f:
+    logging.config.dictConfig(yaml.safe_load(f.read()))

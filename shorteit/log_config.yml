@@ -1,0 +1,20 @@
+version: 1
+
+disable_exsisteng_loggers: False
+
+formatters:
+  std_format:
+    format: "{asctime} - {module}.{funcName} - {levelname} - {message}"
+    style: "{"
+
+handlers:
+  debug_file_handler:
+    level: DEBUG
+    formatter: std_format
+    filename: debug.log
+    class: logging.FileHandler
+
+loggers:
+  debug_log:
+    level: DEBUG
+    handlers: [debug_file_handler]

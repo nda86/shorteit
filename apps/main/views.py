@@ -1,13 +1,16 @@
-from django.views import generic
-from django.shortcuts import redirect, render
-from django.contrib import messages
-from django.views.decorators.cache import cache_page
+import logging
 
+from django.views import generic
+from django.shortcuts import redirect
+from django.contrib import messages
 
 from .forms import ShortUrlCreateForm
 from .services import (
 	create_short_url, get_list_url, get_original_url, increment_count_links
 )
+
+
+log = logging.getLogger('debug_log')
 
 
 class HomeView(generic.TemplateView):
@@ -45,8 +48,10 @@ class ShortUrlCreate(generic.FormView):
 def redirect_to_original_url(request, short):
 	url = get_original_url(short)
 	if url:
+		log.debug(f"Редирект на {url.original_url}")
 		increment_count_links(url)
 		return redirect(url.original_url)
 	else:
+		log.warning(f"Запрошенный короткий url c subpart '{short}' не был найден")
 		messages.warning(request, "Запрошенный URL не найден. Возможно он уже удален из базы")
 		return redirect('shorturl_list_view')
