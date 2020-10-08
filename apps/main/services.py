@@ -36,7 +36,7 @@ def create_short_url(request):
 		return False, "Неизвестная ошибка. Попробуйте повторить"
 
 
-def get_list_url(request):
+def get_queryset_short_url(request):
 	return ShortUrl.objects.filter(user_id=get_user_id(request)).all()
 
 

@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from .services import get_queryset_short_url
+from .serializers import ShortUrlSerializer
+
+
+class ShortUrlApi(ModelViewSet):
+	queryset = get_queryset_short_url()
+	serializer_class = ShortUrlSerializer

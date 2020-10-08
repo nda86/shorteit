@@ -26,7 +26,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'apps.main'
+    'rest_framework',
+
+    'apps.main',
+    'apps.api',
 ]
 
 MIDDLEWARE = [
@@ -107,3 +110,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 with open(os.path.join(ROOT_DIR, "log_config.yml")) as f:
     logging.config.dictConfig(yaml.safe_load(f.read()))
+
+
+REST_FRAMEWORK = {
+    'UNAUTHENTICATED_USER': None,
+}

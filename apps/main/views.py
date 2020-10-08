@@ -6,7 +6,7 @@ from django.contrib import messages
 
 from .forms import ShortUrlCreateForm
 from .services import (
-	create_short_url, get_list_url, get_original_url, increment_count_links
+	create_short_url, get_queryset_short_url, get_original_url, increment_count_links
 )
 
 
@@ -23,7 +23,7 @@ class ShortUrlList(generic.ListView):
 	paginate_by = 3
 
 	def get_queryset(self):
-		return get_list_url(self.request)
+		return get_queryset_short_url(self.request)
 
 
 class ShortUrlCreate(generic.FormView):
