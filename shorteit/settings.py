@@ -8,6 +8,7 @@ import logging.config
 
 
 load_dotenv()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent
 
@@ -88,6 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# бэкенд для системы кэширования django
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
@@ -112,10 +114,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+
+# сичтываем и загружаем настройки для логирования
 with open(os.path.join(ROOT_DIR, "log_config.yml")) as f:
     logging.config.dictConfig(yaml.safe_load(f.read()))
 
 
+# насройки drf. Указываем что user без аутентификации будет None. Это что бы drf работал без django.contrib.admin
 REST_FRAMEWORK = {
     'UNAUTHENTICATED_USER': None,
+}
+
+# настройки для Celery
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BEAT_SCHEDULE = {
+    'clear_shorturl_table': {
+        'task': 'clear_shorturl',
+        'schedule': 3600
+    }
 }
