@@ -13,7 +13,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 
 
 SECRET_KEY = os.environ["SECRET_KEY"]
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 BASE_URL = "http://127.0.0.1:8090"
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.api',
 ]
 
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -40,9 +41,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'apps.main.middlewares.SetUserIdMiddleware',
-]
 
+
+    'apps.main.middlewares.SetUserIdMiddleware',
+    'apps.main.middlewares.CatchUnhadledException',
+
+]
 ROOT_URLCONF = 'shorteit.urls'
 
 TEMPLATES = [
