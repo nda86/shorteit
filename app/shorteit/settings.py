@@ -16,7 +16,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = False
 ALLOWED_HOSTS = ['*']
-BASE_URL = "http://127.0.0.1:8090"
+BASE_URL = "http://127.0.0.1"
 
 
 # Application definition
@@ -110,7 +110,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATICFILES_DIRS = []
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
