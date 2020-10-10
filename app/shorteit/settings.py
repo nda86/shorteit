@@ -29,8 +29,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'apps.main',
-    'apps.api',
+    'app.apps.main',
+    'app.apps.api',
 ]
 
 
@@ -42,10 +42,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-
-
-    'apps.main.middlewares.SetUserIdMiddleware',
-    'apps.main.middlewares.CatchUnhadledException',
+    'app.apps.main.middlewares.SetUserIdMiddleware',
+    'app.apps.main.middlewares.CatchUnhadledException',
 
 ]
 ROOT_URLCONF = 'shorteit.urls'

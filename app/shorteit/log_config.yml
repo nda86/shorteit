@@ -12,19 +12,19 @@ handlers:
     class: logging.FileHandler
     level: DEBUG
     formatter: std_format
-    filename: debug.log
+    filename: logs/debug.log
 
   unhandled_exception_handler:
     class: logging.FileHandler
     level: ERROR
     formatter: std_format
-    filename: unhandled_exception.log
+    filename: logs/unhandled_exception.log
 
 
   django_log:
     class: logging.FileHandler
     level: INFO
-    filename: django_debug.log
+    filename: logs/django_debug.log
 
 loggers:
   debug_log:

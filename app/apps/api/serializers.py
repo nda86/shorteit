@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from apps.main.models import ShortUrl
+from app.apps.main.models import ShortUrl
 
 
 class ShortUrlSerializer(ModelSerializer):

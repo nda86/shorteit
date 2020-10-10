@@ -1,8 +1,8 @@
 .idea
-venv
+app/venv
 */**/__pycache__
-*.env
-*.sqlite3
-__pycache__
-*.log
+app/*.env
+app/*.sqlite3
+app/__pycache__
+app/logs/*.log
 */**/*.log

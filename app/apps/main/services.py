@@ -5,7 +5,7 @@ from django.http.request import HttpRequest
 from django.db.models import QuerySet
 
 from .models import ShortUrl
-from shorteit.settings import BASE_URL
+from app.shorteit.settings import BASE_URL
 
 # получаем объект логгера
 log = logging.getLogger("debug_log")
