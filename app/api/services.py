@@ -1,4 +1,3 @@
-import uuid
 import logging
 from main.models import ShortUrl
 from main.services import gen_subpart
@@ -20,16 +19,6 @@ def get_queryset_short_url(request):
 		log.error(f"Ошибка бд при запросе списка ссылок для юзера {user_id}")
 		log.error(e, exc_info=True)
 		return []
-
-
-def is_uuid(s):
-	# проверяем что s в формате uuid
-	try:
-		uuid.UUID(s, version=4)
-		return True
-	except ValueError as e:
-		log.debug(f"Переданный параметр: {s} не в формате uuid!")
-		return False
 
 
 def gen_short_url(original_url, subpart):
