@@ -1,7 +1,6 @@
 .idea
 app/venv
 */**/__pycache__
-app/*.env
 app/*.sqlite3
 app/__pycache__
 app/logs/*.log

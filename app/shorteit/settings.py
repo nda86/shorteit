@@ -29,8 +29,8 @@ INSTALLED_APPS = [
 
     'rest_framework',
 
-    'app.apps.main',
-    'app.apps.api',
+    'main',
+    'api',
 ]
 
 
@@ -42,8 +42,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'app.apps.main.middlewares.SetUserIdMiddleware',
-    'app.apps.main.middlewares.CatchUnhadledException',
+    'main.middlewares.SetUserIdMiddleware',
+    'main.middlewares.CatchUnhadledException',
 
 ]
 ROOT_URLCONF = 'shorteit.urls'
@@ -91,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.environ.get("CACHE_REDIS_URI"),
+        'LOCATION': os.environ.get("CACHE_REDIS_URL"),
         'KEY_PREFIX': 'shortit_cache'
     }
 }
@@ -124,8 +124,8 @@ REST_FRAMEWORK = {
 }
 
 # настройки для Celery
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_BROKER_URL = os.environ["CELERY_REDIS_URL"]
+CELERY_RESULT_BACKEND = os.environ["CELERY_REDIS_URL"]
 CELERY_BEAT_SCHEDULE = {
     'clear_shorturl_table': {
         'task': 'clear_shorturl',

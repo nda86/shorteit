@@ -1,4 +1,4 @@
-from app.apps.main.models import ShortUrl
+from main.models import ShortUrl
 
 
 def get_queryset_short_url():
