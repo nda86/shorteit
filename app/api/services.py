@@ -1,6 +1,8 @@
 import uuid
 import logging
 from main.models import ShortUrl
+from main.services import gen_subpart
+from shorteit.settings import BASE_URL
 
 
 log = logging.getLogger('api_debug')
@@ -28,3 +30,12 @@ def is_uuid(s):
 	except ValueError as e:
 		log.debug(f"Переданный параметр: {s} не в формате uuid!")
 		return False
+
+
+def gen_short_url(original_url, subpart):
+	if subpart:
+		log.debug(f"Короткий url будет создан с помощью пользовательского subpart {subpart}")
+	subpart = subpart or gen_subpart(original_url)
+	short_url = BASE_URL + "/s/" + subpart
+	log.debug(f"Сгенерирован коротки url {short_url}")
+	return short_url

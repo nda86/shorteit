@@ -27,7 +27,7 @@ def get_user_id(request: HttpRequest) -> str:
 		return ""
 
 
-def gen_short_url(original_url: str) -> str:
+def gen_subpart(original_url: str) -> str:
 	"""Cоздание subpart части для короткого url
 	на основе введенного url гененируем <subpart> часть сокращенного url
 	из ввееденного url генерируем хэш по алгоритму sha1, затем берем первые 10 символов из hex представления
@@ -53,7 +53,8 @@ def create_short_url(request: HttpRequest) -> Tuple[bool, str]:
 	subpart = request.POST.get('subpart').strip()
 	if subpart:
 		log.debug(f"Использован {subpart} введенный пользователем")
-	short_url = BASE_URL + "/s/" + (subpart if subpart else gen_short_url(original_url))
+
+	short_url = BASE_URL + "/s/" + (subpart if subpart else gen_subpart(original_url))
 
 	# обработка случая когда введенное пользователем subpart часть url уже использована
 	if ShortUrl.objects.filter(short_url=short_url).first():

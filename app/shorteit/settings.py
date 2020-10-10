@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ['*']
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +48,10 @@ MIDDLEWARE = [
 
 ]
 ROOT_URLCONF = 'shorteit.urls'
+
+
+# настройки шаблонов
+PAGINATE_PER_PAGE = 3
 
 TEMPLATES = [
     {
