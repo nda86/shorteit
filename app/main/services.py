@@ -19,7 +19,7 @@ def get_user_id(request: HttpRequest) -> str:
 
 	try:
 		user_id = request.session.get("user_id")
-		log.debug(f"Из запроса получен {user_id=}")
+		log.debug(f"Из запроса получен {user_id}")
 		return user_id
 	except Exception as e:
 		log.error("Ошибка при получение user_id")
@@ -35,7 +35,7 @@ def gen_short_url(original_url: str) -> str:
 	"""
 
 	subpart = hashlib.sha1(original_url.encode()).hexdigest()[:10]
-	log.debug(f"Сгенерирован <subpart> для короткого url {subpart=}")
+	log.debug(f"Сгенерирован <subpart> для короткого url {subpart}")
 	return subpart
 
 
@@ -52,7 +52,7 @@ def create_short_url(request: HttpRequest) -> Tuple[bool, str]:
 	original_url = request.POST.get('original_url')
 	subpart = request.POST.get('subpart').strip()
 	if subpart:
-		log.debug(f"Использован {subpart=} введенный пользователем")
+		log.debug(f"Использован {subpart} введенный пользователем")
 	short_url = BASE_URL + "/s/" + (subpart if subpart else gen_short_url(original_url))
 
 	# обработка случая когда введенное пользователем subpart часть url уже использована
@@ -62,7 +62,7 @@ def create_short_url(request: HttpRequest) -> Tuple[bool, str]:
 
 	# обработка случая когда пользователь пытается сократитиь уже сокращенный ранее адрес
 	if ShortUrl.objects.filter(user_id=user_id, original_url=original_url).first():
-		log.warning(f"Ошибка при добавлении короткого url в бд. Для {original_url=} user уже создавал короткий url")
+		log.warning(f"Ошибка при добавлении короткого url в бд. Для {original_url} user уже создавал короткий url")
 		return False, "Вы уже добавляли данный адрес. Введите другой адрес!"
 
 	try:
@@ -105,7 +105,7 @@ def increment_count_links(url: ShortUrl) -> None:
 	try:
 		url.count_click += 1
 		url.save()
-		log.debug(f"Увеличен на 1 счетчик переходов по ссылке {url=}")
+		log.debug(f"Увеличен на 1 счетчик переходов по ссылке {url}")
 	except Exception as e:
-		log.error(f"Произошла ошибка при инкрименте счетчика переходов по ссылке {url=}")
+		log.error(f"Произошла ошибка при инкрименте счетчика переходов по ссылке {url}")
 		log.error(e, exc_info=True)
