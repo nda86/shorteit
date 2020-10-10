@@ -1,4 +1,4 @@
-FROM tiangolo/uwsgi-nginx:python3.8
+FROM tiangolo/uwsgi-nginx:python3.7
 MAINTAINER Dmitry Naumov <nda86@mail.ru>
 # Add mc file manager and nano editor
 RUN set -x \
