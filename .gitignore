@@ -5,3 +5,5 @@ app/*.sqlite3
 app/__pycache__
 app/logs/*.log
 */**/*.log
+app/.env.dev
+app/celerybeat-schedule*

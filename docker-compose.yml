@@ -21,6 +21,7 @@ services:
    UWSGI_CHEAPER: 2
    UWSGI_PROCESS: 16
    UWSGI_READ_TIMEOUT: 3600
+   BASE_URL=http://192.168.75.128
   ports:
    - 80:80
   depends_on:
