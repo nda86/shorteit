@@ -7,14 +7,14 @@ import logging
 import logging.config
 
 
-load_dotenv(dotenv_path='.env')
+load_dotenv(dotenv_path='.env.dev')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent
 
 
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 

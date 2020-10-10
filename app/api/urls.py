@@ -11,7 +11,7 @@ class OptionalSlashDefaulRouter(DefaultRouter):
 
 
 router = OptionalSlashDefaulRouter()
-router.register(r'shorturls', ShortUrlApi)
+router.register(r'shorturls', ShortUrlApi, basename='x')
 
 urlpatterns = [
 	path('', include(router.urls))

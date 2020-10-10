@@ -14,6 +14,12 @@ handlers:
     formatter: std_format
     filename: logs/debug.log
 
+  api_file_handler:
+    class: logging.FileHandler
+    level: DEBUG
+    formatter: std_format
+    filename: logs/api_debug.log
+
   unhandled_exception_handler:
     class: logging.FileHandler
     level: ERROR
@@ -30,6 +36,10 @@ loggers:
   debug_log:
     level: DEBUG
     handlers: [debug_file_handler]
+
+  api_debug:
+    level: DEBUG
+    handlers: [api_file_handler]
 
   unhandled_exception:
     level: ERROR
