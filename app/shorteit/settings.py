@@ -7,7 +7,7 @@ import logging
 import logging.config
 
 
-load_dotenv(dotenv_path='.env.dev')
+load_dotenv(dotenv_path='.env')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent
