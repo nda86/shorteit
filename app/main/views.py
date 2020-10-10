@@ -47,7 +47,7 @@ class ShortUrlCreate(generic.FormView):
 
 		success, msg = create_short_url(request)
 		if not success:
-			log.error(f"Ошибка при создании короткого url {msg=}")
+			log.error(f"Ошибка при создании короткого url {msg}")
 			messages.error(request, msg)
 			return redirect("shorturl_create_view")
 

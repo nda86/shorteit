@@ -7,16 +7,16 @@ import logging
 import logging.config
 
 
-load_dotenv()
+load_dotenv(dotenv_path='.env')
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ROOT_DIR = Path(__file__).resolve().parent
 
 
-SECRET_KEY = os.environ["SECRET_KEY"]
+SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 ALLOWED_HOSTS = ['*']
-BASE_URL = "http://127.0.0.1"
+BASE_URL = os.environ.get("BASE_URL", "http://localhost:8000")
 
 
 # Application definition
@@ -67,7 +67,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'shorteit.wsgi.application'
 
 
-DATABASES = {'default': dj_database_url.parse(url=os.environ["SQL_DATABASE_URI"])}
+DATABASES = {'default': dj_database_url.parse(url=os.environ.get("SQL_DATABASE_URI"))}
 
 
 # Password validation
@@ -125,11 +125,11 @@ REST_FRAMEWORK = {
 }
 
 # настройки для Celery
-CELERY_BROKER_URL = os.environ["CELERY_REDIS_URL"]
-CELERY_RESULT_BACKEND = os.environ["CELERY_REDIS_URL"]
+CELERY_BROKER_URL = os.environ.get("CELERY_REDIS_URL")
+CELERY_RESULT_BACKEND = os.environ.get("CELERY_REDIS_URL")
 CELERY_BEAT_SCHEDULE = {
     'clear_shorturl_table': {
         'task': 'clear_shorturl',
-        'schedule': 3600
+        'schedule': 60 * 60
     }
 }

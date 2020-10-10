@@ -8,5 +8,3 @@ urlpatterns = [
 	path('add', ShortUrlCreate.as_view(), name='shorturl_create_view'),
 	re_path(r'^s/(?P<short>.*)', redirect_to_original_url),
 ]
-
-
